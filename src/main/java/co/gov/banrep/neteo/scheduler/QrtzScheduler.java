@@ -78,7 +78,6 @@ public class QrtzScheduler {
 
     @Bean
     public JobDetail jobDetail() {
-
         return newJob().ofType(ModelUpdateJob.class).storeDurably().withIdentity(JobKey.jobKey("Qrtz_Job_Detail")).withDescription("Invoke Sample Job service...").build();
     }
 

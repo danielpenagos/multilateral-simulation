@@ -17,6 +17,4 @@ public class ModelUpdateJob implements Job {
 		jobService.executeUpdateJob();		
 	}
 
-	
-
 }

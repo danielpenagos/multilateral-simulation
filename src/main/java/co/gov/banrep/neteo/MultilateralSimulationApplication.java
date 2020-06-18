@@ -9,5 +9,4 @@ public class MultilateralSimulationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MultilateralSimulationApplication.class, args);
 	}
-
 }

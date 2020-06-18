@@ -11,7 +11,7 @@ public class TransactionIdGenerator {
 	}
 
 	public static void reestablecer() {
-		
+		id = 0;
 	}
 
 }

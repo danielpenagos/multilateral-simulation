@@ -16,22 +16,17 @@ public class ModelUpdateService {
 	
 	private boolean autogeneracion=true;
 
-
 	public void executeUpdateJob() {
 		if(autogeneracion) {
 			simulator.incluirTransacciones();
 		}
 	}
 
-
 	public boolean isAutogeneracion() {
 		return autogeneracion;
 	}
 
-
 	public void setAutogeneracion(boolean autogeneracion) {
 		this.autogeneracion = autogeneracion;
 	}
-	
-	
 }

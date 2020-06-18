@@ -1,3 +1,14 @@
+/**
+Copyright 2020. Banco de la República. dpenagbo@banrep.gov.co
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The views and conclusions contained in the software and documentation are those of the authors and should not be interpreted as representing official policies, either expressed or implied, of the FreeBSD Project.
+*/
+
 package co.gov.banrep.neteo.simulacion;
 
 import java.time.ZonedDateTime;
@@ -87,8 +98,6 @@ public class EntidadesFinancieras {
 		}
 	}
 
-	
-
 	public Transaccion registrarTransaccion(String issuer, String owner, Integer value) {
 		
 		Integer idIssuer = getEntidad(issuer);
@@ -109,7 +118,6 @@ public class EntidadesFinancieras {
 			return null;
 		}
 	} 
-
 
 	public void netear() {
 		if(!estamosEnNeteo&&transacciones.size()>100) {
@@ -152,7 +160,6 @@ public class EntidadesFinancieras {
 					List<Integer> camino = netearMultilateral(objNeteoMulti.getMatriz(),entidad);
 					logger.debug("camino para la entidad {} : {}",entidad,camino);
 					if(!camino.isEmpty()) {
-						//neteoMultilateral=realizarNeteo(entidad, transaccionesNeteoBilateral, MatrizUtils.obtenerCamino(camino),MatrizUtils.valorMenorCamino(neteoMultilateral, camino));
 						objNeteoMulti=realizarNeteoMultilateral(entidad, objNeteoMulti.getTransacciones(), camino,MatrizUtils.valorMenorCamino(objNeteoMulti.getMatriz(), camino));
 						sb.append(entidad+1).append(" ");
 						notificacion.agregarCaminoMultilateral(camino);
@@ -167,7 +174,7 @@ public class EntidadesFinancieras {
 			estamosEnNeteo=false;
 			logger.info("FIN DEL NETEO");
 		}else {
-			//logger.info("Hay un neteo en curso.. pasando por alto");
+			logger.debug("Hay un neteo en curso.. pasando por alto");
 		}
 		
 	}
@@ -245,7 +252,6 @@ public class EntidadesFinancieras {
 		for(Map.Entry<Integer, EntidadFinanciera>ef: entidadesCol.entrySet()) {		
 			ef.getValue().adicionarTransacciones(transaccionesAAgregar);
 		}
-		
 	}
 
 
@@ -271,10 +277,6 @@ public class EntidadesFinancieras {
 		List<Integer>camino = Multilateral.encontrarCamino(acumulado, entidad);
 		if(camino.isEmpty()) {
 			logger.debug("No hay neteo multilateral para la entidad en la posicion {}", entidad);
-		}else {
-			//logger.debug("Neteo multilateral para la entidad:{} ", entidad);
-			//MatrizUtils.obtenerCamino(camino);
-			//MatrizUtils.valorMenorCamino(acumulado, camino);
 		}
 		return camino;
 	}
@@ -289,8 +291,5 @@ public class EntidadesFinancieras {
 	public void addEntidFinancSimuladas(String strEntidad) {
 		entidFinancSimuladas.add(strEntidad);
 	}
-
-	
-	
 
 }

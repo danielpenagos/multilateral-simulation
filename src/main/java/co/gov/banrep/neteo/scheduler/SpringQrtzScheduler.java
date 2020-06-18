@@ -1,6 +1,5 @@
 package co.gov.banrep.neteo.scheduler;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.quartz.JobDetail;
@@ -26,21 +25,12 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 @ConditionalOnExpression("'${using.spring.schedulerFactory}'=='true'")
 public class SpringQrtzScheduler {
 
-    //Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private ApplicationContext applicationContext;
-
-    @PostConstruct
-    public void init() {
-        //logger.info("Hello world from Spring...");
-    }
 
     @Bean
     public SpringBeanJobFactory springBeanJobFactory() {
         AutoWiringSpringBeanJobFactory jobFactory = new AutoWiringSpringBeanJobFactory();
-        //logger.debug("Configuring Job factory");
-
         jobFactory.setApplicationContext(applicationContext);
         return jobFactory;
     }

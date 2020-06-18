@@ -7,7 +7,6 @@ public class Transaccion {
 	private Integer owner = 0;
 	private Integer amount = 0;
 	private Integer type = 0;
-	private Integer idTxCierre =0;
 	private boolean activa=true;
 	
 	public Transaccion(Integer issuer, Integer owner, Integer amount) {
